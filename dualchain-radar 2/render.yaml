@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: dualchain-radar
+    runtime: python
+    plan: 0.5c-512mb
+    buildCommand: pip install .
+    startCommand: dualradar-web
+    healthCheckPath: /healthz
+    numInstances: 1
+    envVars:
+      - key: DASHBOARD_PASSWORD
+        sync: false
+      - key: RADAR_DATA_DIR
+        value: /var/data
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    disk:
+      name: radar-data
+      mountPath: /var/data
+      sizeGB: 1

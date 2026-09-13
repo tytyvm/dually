@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dualchain-radar"
+version = "0.2.0"
+description = "Solana and Robinhood microcap research and paper-trading engine"
+requires-python = ">=3.11"
+dependencies = ["httpx[socks]>=0.27,<1", "fastapi>=0.115,<1", "uvicorn>=0.32,<1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+dualradar = "radar.cli:main"
+dualradar-web = "radar.web:main"
+
+[tool.setuptools.package-data]
+radar = ["static/*"]
+
+[tool.setuptools.packages.find]
+include = ["radar*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
